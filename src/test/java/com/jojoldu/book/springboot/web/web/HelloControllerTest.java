@@ -34,6 +34,15 @@ public class HelloControllerTest {
     }
 
     @Test
+    public void sorry가_리턴된다() throws Exception{
+        String sorry = "sorry";
+
+        mvc.perform(get("/sorry"))
+            .andExpect(status().isOk())
+            .andExpect(content().string(sorry));
+    }
+
+    @Test
     public void helloDto가_리턴된다() throws Exception{
         String name = "hello";
         int amount = 1000;
