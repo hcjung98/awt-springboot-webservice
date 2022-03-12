@@ -18,14 +18,20 @@ public class PostsApiController {
         return postsService.save(requestDto);
     }
 
-    @PutMapping("api/v1/posts/{id}")
+    @PutMapping("api/v1/posts/{id}") // 수정 실행
     public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
         return postsService.update(id, requestDto);
     }
 
-    @GetMapping("api/v1/posts/{id}")
+    @GetMapping("api/v1/posts/{id}") // 수정할 게시물을 조회
     public PostsResponseDto findById(@PathVariable Long id) {
         return postsService.findById(id);
+    }
+
+    @DeleteMapping("api/v1/posts/{id}") // 게시물 삭제
+    public Long delete(@PathVariable Long id) {
+        postsService.delete(id);
+        return id;
     }
 
 }
