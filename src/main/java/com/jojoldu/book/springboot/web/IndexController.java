@@ -26,7 +26,9 @@ public class IndexController {
         return "posts-save";
     }
 
-    @GetMapping("/posts/update/{id}") // 수정할 데이터 조회
+    // 수정할 데이터 조회하는 API로 PostsApiController에 정의하지 않고 IndexController에 정의
+    // 해당 게시물을 조회해서 수정페이지에 로딩 
+    @GetMapping("/posts/update/{id}") 
     public String postUpdate(@PathVariable Long id, Model model) {
         PostsResponseDto dto = postsService.findById(id);
         model.addAttribute("post", dto);

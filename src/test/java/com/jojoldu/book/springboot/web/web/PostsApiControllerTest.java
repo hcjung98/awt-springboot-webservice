@@ -98,4 +98,24 @@ public class PostsApiControllerTest {
         assertThat(all.get(0).getTitle()).isEqualTo(expectedTitle);
         assertThat(all.get(0).getContent()).isEqualTo(expectedContent);
     }
+
+    @Test
+    public void Posts_삭제된다() throws Exception {
+        //given
+        Posts savePosts = postsRepository.save(Posts.builder()
+                .title("title")
+                .content("content")
+                .author("author")
+                .build());
+        Long deleteId = savePosts.getId();
+
+        String url = "http://localhost:" + port + "/api/v1/posts/" + deleteId;
+
+        //when
+        restTemplate.delete(url, Long.class);
+
+        //then
+        List<Posts> all = postsRepository.findAll();
+        assertThat(all.isEmpty());
+    }
 }
